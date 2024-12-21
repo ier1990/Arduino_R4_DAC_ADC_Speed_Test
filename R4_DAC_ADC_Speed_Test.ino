@@ -75,7 +75,7 @@ int plotter = false;
  //unsigned long samplePeriod = 1000000 / (freq * NUM_SAMPLES); // Calculate delay for 10Hz signal with NUM_SAMPLES samples per period
  //unsigned long samplePeriod = (1.000000000/freq)/NUM_SAMPLES+25;
  //unsigned long samplePeriod = (1.000000000/freq)*1000000; // Approximate delay for sampling at 600 Hz (1/600 s ≈ 1667 µs) } 
- // analogWrite takes c. 10uS for the code and 5uS (max) for the DAC output to change.
+ // analogWrite takes c. 10uS for the code and 5uS (max) for the DAC output to change. 
  unsigned long samplePeriod = 11;// ~25us for an analog read with no delay, so give it another 25us to rest before next sample attempt?
 // samplePeriod = 230 ~ 10hz
 // samplePeriod = 1 ! 78.11hz
@@ -161,7 +161,7 @@ void loop() {
   for (int i = 0; i < NUM_SAMPLES; i++) {
     // analogWrite takes c. 10uS for the code and 5uS (max) for the DAC output to change.
     analogWrite(A0, sineLookupTable[i]); // Write to DAC using mod operator
-    //delay in Microseconds to allow the DAC to settle
+    //delay in Microseconds to create/adjust for 60hz sine wave
     delayMicroseconds(samplePeriod); 
     //Read the ADC
     readings[i] = analogRead(A1);
