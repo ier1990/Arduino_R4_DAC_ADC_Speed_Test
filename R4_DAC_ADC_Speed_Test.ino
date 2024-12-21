@@ -211,7 +211,8 @@ void loop() {
     Serial.print("Resolution set to "); Serial.print(adcResolution); Serial.println("-bit");
     Serial.print("Number of Samples "); Serial.print(NUM_SAMPLES); Serial.println("");
     Serial.print("Sample Delay set to "); Serial.print(samplePeriod); Serial.println("us");
-    //Serial.print("Total Time "); Serial.print((timestamps[2] - timestamps[1]) * NUM_SAMPLES); Serial.print("us ~ "); 
+    //Total Time for 1 cycle of 60hz = 16667us
+    //11us delay per sample = 11us * 360 samples = 3960us
     Serial.print("Total Time "); Serial.print(totalTime); Serial.print("us ~ "); 
     Serial.print(frequency, 2); Serial.println(" Hz"); 
     
