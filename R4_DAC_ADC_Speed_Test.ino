@@ -68,12 +68,13 @@ https://forum.arduino.cc/t/arduino-uno-r4-dac-speed/1177741
 We are using a 12-bit ADC and DAC, so the resolution is 4096 steps (0-4095)
 The DAC is outputting a 60hz sine wave with 360 samples per cycle
 The ADC is reading the sine wave and storing the values in an array
-The time between each sample is 11us, which is the delay between each analogWrite and analogRead
+The time delay between each sample is 11us, which is also the delay between each analogWrite and analogRead
 The total time for one cycle of the sine wave is 16658us, which is approximately 60.03hz
 The ADC readings are averaging around 23 to 24 microseconds per read with no delay
 The DAC12 conversion time is 30uS to reach specified accuracy... although the 'scope shows this as being faster.
 46.3us - 23us = 23.3us per sample
 23.3us per sample - 11us delay = 12.3us per sample for DAC
+DAC analogWrite takes ~ 10uS for the code and 5uS (max) for the DAC output to change. 
 12.3us per sample for DAC + 23us per sample for ADC + 11us delay = 46.3us per sample
 46.3us per sample * 360 samples = 16,668us per cycle
 16,668us per cycle = 60.03hz
@@ -106,7 +107,7 @@ int plotter = false;
  //unsigned long samplePeriod = 1000000 / (freq * NUM_SAMPLES); // Calculate delay for 10Hz signal with NUM_SAMPLES samples per period
  //unsigned long samplePeriod = (1.000000000/freq)/NUM_SAMPLES+25;
  //unsigned long samplePeriod = (1.000000000/freq)*1000000; // Approximate delay for sampling at 600 Hz (1/600 s ≈ 1667 µs) } 
- // analogWrite takes c. 10uS for the code and 5uS (max) for the DAC output to change. 
+ //DAC analogWrite takes ~ 10uS for the code and 5uS (max) for the DAC output to change. 
  unsigned long samplePeriod = 11;// ~25us for an analog read with no delay, so give it another 25us to rest before next sample attempt?
 // samplePeriod = 230 ~ 10hz
 // samplePeriod = 1 ! 78.11hz
