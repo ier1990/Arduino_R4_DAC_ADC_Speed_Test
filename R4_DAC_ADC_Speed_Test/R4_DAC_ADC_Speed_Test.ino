@@ -102,7 +102,7 @@ int readings[NUM_SAMPLES];
 unsigned long timestamps[NUM_SAMPLES];
 
 //Set the ADC & DAC resolution
-int adcResolution = 14;
+int adcResolution = 12;
 float bitresolution = pow(2, adcResolution) - 1;
 int plotter = false;
 
