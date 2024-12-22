@@ -48,6 +48,37 @@
 Sketch uses 64180 bytes (24%) of program storage space. Maximum is 262144 bytes.
 Global variables use 9652 bytes (29%) of dynamic memory, leaving 23116 bytes for local variables. Maximum is 32768 bytes.  
 
+
+
+1 cycle of 60hz = 16667us
+16667us / 360 samples = 46.3us per sample
+11us delay per sample = 11us * 360 samples = 3,960us
+16,667us - 3,960us = 12,707us
+12,707us / 360 samples = 35.3us per sample
+
+60hz is 16.67ms per cycle
+with a delay of 230 the frequency is ~ 10hz
+with a delay of 1 the frequency is ~ 78.11hz
+with a delay of 11 the frequency is ~ 60.03hz
+
+ADC takes 23 to 24 microseconds per read with no delay
+DAC12 conversion time is 30uS to reach specified accuracy... although the 'scope shows this as being faster.
+https://forum.arduino.cc/t/arduino-uno-r4-dac-speed/1177741
+
+We are using a 12-bit ADC and DAC, so the resolution is 4096 steps (0-4095)
+The DAC is outputting a 60hz sine wave with 360 samples per cycle
+The ADC is reading the sine wave and storing the values in an array
+The time between each sample is 11us, which is the delay between each analogWrite and analogRead
+The total time for one cycle of the sine wave is 16658us, which is approximately 60.03hz
+The ADC readings are averaging around 23 to 24 microseconds per read with no delay
+The DAC12 conversion time is 30uS to reach specified accuracy... although the 'scope shows this as being faster.
+46.3us - 23us = 23.3us per sample
+23.3us per sample - 11us delay = 12.3us per sample for DAC
+12.3us per sample for DAC + 23us per sample for ADC + 11us delay = 46.3us per sample
+46.3us per sample * 360 samples = 16,668us per cycle
+16,668us per cycle = 60.03hz
+
+
   */
 
 
