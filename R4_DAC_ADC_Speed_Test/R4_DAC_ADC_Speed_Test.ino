@@ -1,3 +1,10 @@
+#include <analogWave.h>
+analogWave wave(DAC);   // Create an instance of the analogWave class, using the DAC pin
+
+
+
+
+
   
     /*
     Arduino UNO R4 DAC Speed Test
@@ -95,7 +102,7 @@ int readings[NUM_SAMPLES];
 unsigned long timestamps[NUM_SAMPLES];
 
 //Set the ADC & DAC resolution
-int adcResolution = 12;
+int adcResolution = 14;
 float bitresolution = pow(2, adcResolution) - 1;
 int plotter = false;
 
@@ -108,7 +115,7 @@ int plotter = false;
  //unsigned long samplePeriod = (1.000000000/freq)/NUM_SAMPLES+25;
  //unsigned long samplePeriod = (1.000000000/freq)*1000000; // Approximate delay for sampling at 600 Hz (1/600 s ≈ 1667 µs) } 
  //DAC analogWrite takes ~ 10uS for the code and 5uS (max) for the DAC output to change. 
- unsigned long samplePeriod = 11;// ~25us for an analog read with no delay, so give it another 25us to rest before next sample attempt?
+ unsigned long samplePeriod = 20;// ~25us for an analog read with no delay, so give it another 25us to rest before next sample attempt?
 // samplePeriod = 230 ~ 10hz
 // samplePeriod = 1 ! 78.11hz
 
@@ -173,7 +180,7 @@ void setup() {
   analogReadResolution(adcResolution); //change to ??-bit resolution  
   analogWriteResolution(adcResolution);
   
-  //wave.sine(freq);       // Generate a sine wave with the initial frequency  
+  wave.sine(freq);       // Generate a sine wave with the initial frequency  
 
   Serial.println();
   Serial.println("Type commands to adjust settings:");
@@ -192,7 +199,7 @@ void loop() {
   // Loop through the sine wave
   for (int i = 0; i < NUM_SAMPLES; i++) {
     // analogWrite takes c. 10uS for the code and 5uS (max) for the DAC output to change.
-    analogWrite(A0, sineLookupTable[i]); // Write to DAC using mod operator
+    //analogWrite(A0, sineLookupTable[i]); // Write to DAC using mod operator
     //delay in Microseconds to create/adjust for 60hz sine wave
     delayMicroseconds(samplePeriod); 
     //Read the ADC
