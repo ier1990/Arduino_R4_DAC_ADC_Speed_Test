@@ -80,6 +80,18 @@ DAC analogWrite takes ~ 10uS for the code and 5uS (max) for the DAC output to ch
 16,668us per cycle = 60.03hz
 
 
+
+
+
+
+
+
+UNO R4 Library Compatibility
+https://github.com/arduino/uno-r4-library-compatibility
+
+IRremote library says it fails to compile for the UNO R4??
+Firmata library says it fails to compile for the UNO R4??  
+
   */
 
 
